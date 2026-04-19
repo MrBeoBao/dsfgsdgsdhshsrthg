@@ -39,8 +39,7 @@ public class Main extends JFrame implements ActionListener {
             display.setText("");
             num1 = num2 = result = 0;
         }
-    }
-
+    }//ddddd
     public static void main(String[] args) {
         new Main().setVisible(true);
     }
