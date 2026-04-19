@@ -8,6 +8,7 @@ public class Main extends JFrame implements ActionListener {
     double num1 = 0, num2 = 0, result = 0;
     char operator;
 
+
     public Main() {
         setTitle("Calculator");
         setSize(300, 400);
@@ -41,8 +42,38 @@ public class Main extends JFrame implements ActionListener {
         add(panel, BorderLayout.CENTER);
     }
 
+
     public void actionPerformed(ActionEvent e) {
-        
+        String cmd = e.getActionCommand();
+
+        if (cmd.matches("[0-9]")) {
+            display.setText(display.getText() + cmd);
+        } else if (cmd.matches("[+\\-*/]")) {
+            num1 = Double.parseDouble(display.getText());
+            operator = cmd.charAt(0);
+            display.setText("");
+        } else if (cmd.equals("=")) {
+            num2 = Double.parseDouble(display.getText());
+
+            switch (operator) {
+                case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '*': result = num1 * num2; break;
+                case '/':
+                    if (num2 == 0) {
+                        display.setText("Error");
+                        return;
+                    }
+                    result = num1 / num2;
+                    break;
+            }
+
+            display.setText(String.valueOf(result));
+        } else if (cmd.equals("C")) {
+            display.setText("");
+            num1 = num2 = result = 0;
+        }
+
     }
 
     public static void main(String[] args) {
